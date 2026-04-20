@@ -1,0 +1,2032 @@
+types:
+  - name: Arch_system_signal
+    outlinks:
+      - type: Receiving_ECU
+        target:
+          - Generic_SW_Target
+      - type: Sending_ECU
+        target:
+          - Generic_SW_Target
+      - type: System_signal
+        target:
+          - Sender_receiver_interface
+    inlinks:
+      - type: 4INC-Included_communication
+        source:
+          - Arch_system_signal_list
+      - type: ARVK-Created_based_on
+        source:
+          - System_Signal_Group
+      - type: ARVL-Created_based_on
+        source:
+          - System_Signal
+  - name: Arch_system_signal_list
+    outlinks:
+      - type: Included_communication
+        target:
+          - Arch_system_signal
+    inlinks:
+      - type: Arch_system_signals_list
+        source:
+          - Allocated_System
+  - name: Generic_SW_Target
+    inlinks:
+      - type: Receiving_ECU
+        source:
+          - Arch_system_signal
+      - type: Sending_ECU
+        source:
+          - Arch_system_signal
+      - type: Represents_network_signaling_for_generic
+        source:
+          - Network_Node
+          - Machine_design
+      - type: Represents_SW_for_generic
+        source:
+          - SW_Target
+          - SW_machine
+  - name: System
+    outlinks:
+      - type: SW-Target_Machine
+        target:
+          - SW_Target
+          - SW_machine
+    inlinks:
+      - type: Systems
+        source:
+          - Allocated_System
+  - name: SOME_IP_interface_deployment
+    outlinks:
+      - type: Deployed_interface
+        target:
+          - Service_interface
+      - type: Event_groups
+        target:
+          - Someip_event_group
+    inlinks:
+      - type: Deployed_interfaces
+        source:
+          - Service_interface_deployment_list
+      - type: Someip_service_interface_deployment
+        source:
+          - Provided_someip_service_instance
+          - Required_someip_service_instance
+      - type: Service_Interface
+        source:
+          - Service_Definition
+  - name: Array_data_type
+    outlinks:
+      - type: Application_array_element
+        target:
+          - Primitive_data_type
+          - Record_data_type
+    inlinks:
+      - type: Application_record_element
+        source:
+          - Record_data_type
+      - type: Data_type
+        source:
+          - Sender_receiver_interface
+      - type: Application_data_types
+        source:
+          - Application_data_types
+  - name: Primitive_data_type
+    outlinks:
+      - type: Compu_method
+        target:
+          - Compu_method
+      - type: Data_constraint
+        target:
+          - Data_constraint
+    inlinks:
+      - type: Application_array_element
+        source:
+          - Array_data_type
+      - type: Application_record_element
+        source:
+          - Record_data_type
+      - type: Data_type
+        source:
+          - Sender_receiver_interface
+      - type: Application_data_types
+        source:
+          - Application_data_types
+  - name: Record_data_type
+    outlinks:
+      - type: Application_record_element
+        target:
+          - Array_data_type
+          - Primitive_data_type
+    inlinks:
+      - type: Application_array_element
+        source:
+          - Array_data_type
+      - type: Data_type
+        source:
+          - Sender_receiver_interface
+      - type: Application_data_types
+        source:
+          - Application_data_types
+  - name: Process_design
+    outlinks:
+      - type: Executable
+        target:
+          - Executable
+    inlinks:
+      - type: Process_design
+        source:
+          - SW_machine
+  - name: Application_SW_component_type
+    outlinks:
+      - type: Send_port
+        target:
+          - Sender_receiver_interface
+      - type: Receive_port
+        target:
+          - Sender_receiver_interface
+      - type: Design_Requirement_Group
+        target:
+          - Design_Requirement_Group
+    inlinks:
+      - type: Component_prototype
+        source:
+          - Composition_software_component
+      - type: Functional_components
+        source:
+          - Design_Function
+  - name: Consumed_Dynamic_Instance
+    outlinks:
+      - type: Sd_Config
+        target:
+          - Someip_sd_client_service_instance_config
+      - type: Signal_To_Service_Model
+        target:
+          - Signal_To_Service_Model
+      - type: Ethernet_Communication_Connector
+        target:
+          - Ethernet_communication_connector_Classic
+    inlinks:
+      - type: Service_Instances
+        source:
+          - Classic_Service_Instance_List
+  - name: Composition_software_component
+    outlinks:
+      - type: Component_prototype
+        target:
+          - Application_SW_component_type
+          - Composition_software_component
+      - type: Send_port
+        target:
+          - Sender_receiver_interface
+      - type: Receive_port
+        target:
+          - Sender_receiver_interface
+    inlinks:
+      - type: Component_prototype
+        source:
+          - Composition_software_component
+      - type: Allocated_components
+        source:
+          - SW_Target
+      - type: Functional_components
+        source:
+          - Design_Function
+  - name: Type_Reference
+    outlinks:
+      - type: Type_reference
+        target:
+          - Value
+    inlinks:
+      - type: ARDG-Data_type
+        source:
+          - Event
+      - type: ARDH-Data_type
+        source:
+          - Field
+      - type: ARGU-Arguments
+        source:
+          - Service_operation
+      - type: ARSU-Sub_element
+        source:
+          - Structure
+  - name: Compu_method
+    outlinks:
+      - type: Unit
+        target:
+          - Unit
+    inlinks:
+      - type: Compu_method
+        source:
+          - Primitive_data_type
+  - name: Data_constraint
+    inlinks:
+      - type: Data_constraint
+        source:
+          - Primitive_data_type
+  - name: Value
+    inlinks:
+      - type: Template_argument
+        source:
+          - Vector
+      - type: Type_reference
+        source:
+          - Type_Reference
+  - name: Structure
+    outlinks:
+      - type: Sub_element
+        target:
+          - Type_Reference
+    inlinks:
+      - type: Data_type
+        source:
+          - Event
+  - name: Vector
+    outlinks:
+      - type: Template_argument
+        target:
+          - Value
+    inlinks:
+      - type: Data_type
+        source:
+          - Event
+      - type: Arguments
+        source:
+          - Service_operation
+  - name: SW_Target
+    outlinks:
+      - type: Represents_SW_for_generic
+        target:
+          - Generic_SW_Target
+      - type: Allocated_components
+        target:
+          - Composition_software_component
+    inlinks:
+      - type: SW-Target_Machine
+        source:
+          - System
+      - type: Represents_Nominal_Data
+        source:
+          - Conceptual_System_Component
+  - name: Executable
+    outlinks:
+      - type: Allocated_components
+        target:
+          - Adaptive_application_SW_component_type
+    inlinks:
+      - type: Executable
+        source:
+          - Process_design
+      - type: Executables
+        source:
+          - Design_Function
+  - name: System_Signal
+    outlinks:
+      - type: Created_based_on
+        target:
+          - Arch_system_signal
+    inlinks:
+      - type: ARSD-System_signals
+        source:
+          - System_signals_list
+      - type: ARSM-System_signal_to_data_element_mapping
+        source:
+          - Allocated_System
+      - type: ARSY-System_signals
+        source:
+          - System_Signal_Group
+  - name: SomeipService_instance_to_machine_mapping
+    outlinks:
+      - type: Service_Instance
+        target:
+          - Provided_someip_service_instance
+      - type: Ethernet_communication_connector
+        target:
+          - Ethernet_communication_connector_Adaptive
+    inlinks:
+      - type: Someip_service_instance_to_machine_mapping
+        source:
+          - Allocated_System
+  - name: Field
+    outlinks:
+      - type: Data_type
+        target:
+          - Type_Reference
+    inlinks:
+      - type: Fields
+        source:
+          - Service_interface
+  - name: Ethernet_communication_connector_Classic
+    outlinks:
+      - type: Network_Endpoint
+        target:
+          - Network_endpoint
+      - type: EthernetController
+        target:
+          - Ethernet_controller
+    inlinks:
+      - type: Connectors
+        source:
+          - Network_Node
+      - type: Ethernet_communication_connector
+        source:
+          - VLAN
+      - type: Ethernet_Communication_Connector
+        source:
+          - Consumed_Dynamic_Instance
+  - name: Someip_sd_server_instance_configs
+    outlinks:
+      - type: Server_instance_configs
+        target:
+          - Someip_sd_server_service_instance_config
+      - type: Client_instance_configs
+        target:
+          - Someip_sd_client_service_instance_config
+    inlinks:
+      - type: Someip_service_instance_config_list
+        source:
+          - Allocated_System
+  - name: Someip_sd_server_service_instance_config
+    inlinks:
+      - type: Server_instance_configs
+        source:
+          - Someip_sd_server_instance_configs
+      - type: Provided_someip_server_config
+        source:
+          - Provided_someip_service_instance
+  - name: Ethernet_communication_connector_Adaptive
+    outlinks:
+      - type: Unicast_network_endpoint
+        target:
+          - Network_endpoint
+    inlinks:
+      - type: ARFK-Ethernet_communication_connector
+        source:
+          - SomeipService_instance_to_machine_mapping
+      - type: ARGN-Connectors
+        source:
+          - Machine_design
+      - type: ARGO-Ethernet_communication_connector
+        source:
+          - VLAN
+  - name: Provided_someip_service_instance
+    outlinks:
+      - type: Someip_service_interface_deployment
+        target:
+          - SOME_IP_interface_deployment
+      - type: Provided_someip_server_config
+        target:
+          - Someip_sd_server_service_instance_config
+      - type: Provided_event_groups
+        target:
+          - Someip_provided_event_group
+    inlinks:
+      - type: Service_Instance
+        source:
+          - SomeipService_instance_to_machine_mapping
+      - type: Service_instance_to_port_prototype_mapping
+        source:
+          - Allocated_System
+      - type: Service_instance_deployments
+        source:
+          - Service_instance_deployment_list
+  - name: Required_someip_service_instance
+    outlinks:
+      - type: Someip_required_event_group
+        target:
+          - Someip_required_event_group
+      - type: Someip_service_interface_deployment
+        target:
+          - SOME_IP_interface_deployment
+      - type: Required_someip_client_config
+        target:
+          - Someip_sd_client_service_instance_config
+    inlinks:
+      - type: Service_instance_to_port_prototype_mapping
+        source:
+          - Allocated_System
+      - type: Service_instance_deployments
+        source:
+          - Service_instance_deployment_list
+  - name: Someip_sd_client_service_instance_config
+    inlinks:
+      - type: Client_instance_configs
+        source:
+          - Someip_sd_server_instance_configs
+      - type: Required_someip_client_config
+        source:
+          - Required_someip_service_instance
+      - type: Sd_Config
+        source:
+          - Consumed_Dynamic_Instance
+  - name: Someip_provided_event_group
+    outlinks:
+      - type: Provided_event_group
+        target:
+          - Someip_event_group
+    inlinks:
+      - type: Provided_event_groups
+        source:
+          - Provided_someip_service_instance
+  - name: Someip_required_event_group
+    outlinks:
+      - type: Required_event_group
+        target:
+          - Someip_event_group
+    inlinks:
+      - type: Someip_required_event_group
+        source:
+          - Required_someip_service_instance
+  - name: Service_interface_deployment_list
+    outlinks:
+      - type: Deployed_interfaces
+        target:
+          - SOME_IP_interface_deployment
+    inlinks:
+      - type: Interface_deployment_list
+        source:
+          - Allocated_System
+  - name: Service_instance_deployment_list
+    outlinks:
+      - type: Service_instance_deployments
+        target:
+          - Provided_someip_service_instance
+          - Required_someip_service_instance
+    inlinks:
+      - type: Service_instance_deployment_list
+        source:
+          - Allocated_System
+  - name: Allocated_System
+    outlinks:
+      - type: Arch_system_signals_list
+        target:
+          - Arch_system_signal_list
+      - type: Topology
+        target:
+          - Communication_Topology
+      - type: Systems
+        target:
+          - System
+      - type: Interface_deployment_list
+        target:
+          - Service_interface_deployment_list
+      - type: Someip_service_instance_to_machine_mapping
+        target:
+          - SomeipService_instance_to_machine_mapping
+      - type: Someip_service_instance_config_list
+        target:
+          - Someip_sd_server_instance_configs
+      - type: Service_instance_to_port_prototype_mapping
+        target:
+          - Provided_someip_service_instance
+          - Required_someip_service_instance
+      - type: Service_instance_deployment_list
+        target:
+          - Service_instance_deployment_list
+      - type: Classic_Service_Instance_List
+        target:
+          - Classic_Service_Instance_List
+      - type: System_signal_list
+        target:
+          - System_signals_list
+      - type: System_signal_to_data_element_mapping
+        target:
+          - System_Signal
+      - type: System_signal_group_to_interface_mapping
+        target:
+          - System_Signal_Group
+      - type: Signal_To_Service_Model_List
+        target:
+          - Signal_To_Service_List
+    inlinks:
+      - type: Allocated_design
+        source:
+          - Design_Architecture
+  - name: Adaptive_application_error
+    inlinks:
+      - type: Possible_error_refs
+        source:
+          - Service_operation
+  - name: SW_machine
+    outlinks:
+      - type: Represents_SW_for_generic
+        target:
+          - Generic_SW_Target
+      - type: Process_design
+        target:
+          - Process_design
+    inlinks:
+      - type: SW-Target_Machine
+        source:
+          - System
+  - name: Network_endpoint
+    outlinks:
+      - type: Network_addresses
+        target:
+          - Ipv4_configuration
+    inlinks:
+      - type: Network_Endpoint
+        source:
+          - Ethernet_communication_connector_Classic
+      - type: Unicast_network_endpoint
+        source:
+          - Ethernet_communication_connector_Adaptive
+  - name: Adaptive_application_SW_component_type
+    outlinks:
+      - type: Provide_port
+        target:
+          - Service_interface_provide_port
+      - type: Require_port
+        target:
+          - Service_interface_require_port
+    inlinks:
+      - type: Allocated_components
+        source:
+          - Executable
+      - type: Functional_components
+        source:
+          - Design_Function
+  - name: Signal_To_Service_Model
+    outlinks:
+      - type: Realizes_send_port
+        target:
+          - Sender_receiver_interface
+      - type: Service_Definition
+        target:
+          - Service_Definition
+    inlinks:
+      - type: Signal_To_Service_Model
+        source:
+          - Consumed_Dynamic_Instance
+      - type: Signal_To_Service_Models
+        source:
+          - Signal_To_Service_List
+  - name: Event
+    outlinks:
+      - type: Data_type
+        target:
+          - Type_Reference
+          - Structure
+          - Vector
+    inlinks:
+      - type: ARSX-Events
+        source:
+          - Someip_event_group
+      - type: ARVE-Events
+        source:
+          - Service_interface
+  - name: Signal_To_Service_List
+    outlinks:
+      - type: Signal_To_Service_Models
+        target:
+          - Signal_To_Service_Model
+    inlinks:
+      - type: Signal_To_Service_Model_List
+        source:
+          - Allocated_System
+  - name: System_Signal_Group
+    outlinks:
+      - type: System_signals
+        target:
+          - System_Signal
+      - type: Created_based_on
+        target:
+          - Arch_system_signal
+    inlinks:
+      - type: System_signal_groups
+        source:
+          - System_signals_list
+      - type: System_signal_group_to_interface_mapping
+        source:
+          - Allocated_System
+  - name: Sender_receiver_interface
+    outlinks:
+      - type: Data_type
+        target:
+          - Array_data_type
+          - Primitive_data_type
+          - Record_data_type
+    inlinks:
+      - type: System_signal
+        source:
+          - Arch_system_signal
+      - type: Realizes_send_port
+        source:
+          - Signal_To_Service_Model
+      - type: Send_port
+        source:
+          - Application_SW_component_type
+          - Composition_software_component
+      - type: Receive_port
+        source:
+          - Application_SW_component_type
+          - Composition_software_component
+  - name: System_signals_list
+    outlinks:
+      - type: System_signals
+        target:
+          - System_Signal
+      - type: System_signal_groups
+        target:
+          - System_Signal_Group
+    inlinks:
+      - type: System_signal_list
+        source:
+          - Allocated_System
+  - name: Service_operation
+    outlinks:
+      - type: Possible_error_refs
+        target:
+          - Adaptive_application_error
+      - type: Arguments
+        target:
+          - Type_Reference
+          - Vector
+    inlinks:
+      - type: Service_operations
+        source:
+          - Service_interface
+  - name: Someip_event_group
+    outlinks:
+      - type: Events
+        target:
+          - Event
+    inlinks:
+      - type: Provided_event_group
+        source:
+          - Someip_provided_event_group
+      - type: Required_event_group
+        source:
+          - Someip_required_event_group
+      - type: Event_groups
+        source:
+          - SOME_IP_interface_deployment
+  - name: Service_interface
+    outlinks:
+      - type: Service_operations
+        target:
+          - Service_operation
+      - type: Fields
+        target:
+          - Field
+      - type: Events
+        target:
+          - Event
+    inlinks:
+      - type: Deployed_interface
+        source:
+          - SOME_IP_interface_deployment
+      - type: Supplied_Interface
+        source:
+          - Service_interface_provide_port
+      - type: Required_Interface
+        source:
+          - Service_interface_require_port
+      - type: Service_Interface
+        source:
+          - Interface_category
+  - name: Unit
+    inlinks:
+      - type: Unit
+        source:
+          - Compu_method
+  - name: Service_interface_provide_port
+    outlinks:
+      - type: Supplied_Interface
+        target:
+          - Service_interface
+    inlinks:
+      - type: Provide_port
+        source:
+          - Adaptive_application_SW_component_type
+  - name: Service_Definition
+    outlinks:
+      - type: Service_Interface
+        target:
+          - SOME_IP_interface_deployment
+    inlinks:
+      - type: Service_Definition
+        source:
+          - Signal_To_Service_Model
+  - name: Classic_Service_Instance_List
+    outlinks:
+      - type: Service_Instances
+        target:
+          - Consumed_Dynamic_Instance
+    inlinks:
+      - type: Classic_Service_Instance_List
+        source:
+          - Allocated_System
+  - name: Service_interface_require_port
+    outlinks:
+      - type: Required_Interface
+        target:
+          - Service_interface
+    inlinks:
+      - type: Require_port
+        source:
+          - Adaptive_application_SW_component_type
+  - name: Service_interface_list
+    outlinks:
+      - type: Interface_categories
+        target:
+          - Interface_category
+    inlinks:
+      - type: Service_interfaces
+        source:
+          - Design_Architecture
+  - name: Interface_category
+    outlinks:
+      - type: Service_Interface
+        target:
+          - Service_interface
+    inlinks:
+      - type: Interface_categories
+        source:
+          - Service_interface_list
+  - name: Design_Function
+    outlinks:
+      - type: Functional_components
+        target:
+          - Application_SW_component_type
+          - Composition_software_component
+          - Adaptive_application_SW_component_type
+      - type: Executables
+        target:
+          - Executable
+      - type: Design_Function_Inbox
+        target:
+          - Design_Function_Inbox
+      - type: Design_Function_Mapping_Area
+        target:
+          - Mapping_container
+    inlinks:
+      - type: Design_Function
+        source:
+          - Unallocated_Design
+  - name: Unallocated_Design
+    outlinks:
+      - type: Design_Function
+        target:
+          - Design_Function
+    inlinks:
+      - type: Unallocated_Design
+        source:
+          - Design_Architecture
+  - name: Generic_channel
+    inlinks:
+      - type: Generic_channel
+        source:
+          - CAN_channel
+          - VLAN
+  - name: Network_Node
+    outlinks:
+      - type: Represents_network_signaling_for_generic
+        target:
+          - Generic_SW_Target
+      - type: Connectors
+        target:
+          - Ethernet_communication_connector_Classic
+      - type: Controller
+        target:
+          - CAN_controller
+    inlinks:
+      - type: Network_Node
+        source:
+          - Communication_Topology
+  - name: Communication_Topology
+    outlinks:
+      - type: Network_Node
+        target:
+          - Network_Node
+          - Machine_design
+      - type: Clusters
+        target:
+          - CAN_cluster
+          - Ethernet_bus
+    inlinks:
+      - type: Topology
+        source:
+          - Allocated_System
+  - name: CAN_channel
+    outlinks:
+      - type: Generic_channel
+        target:
+          - Generic_channel
+      - type: CAN_controller
+        target:
+          - CAN_controller
+    inlinks:
+      - type: CAN_channel
+        source:
+          - CAN_cluster
+  - name: CAN_controller
+    inlinks:
+      - type: Controller
+        source:
+          - Network_Node
+      - type: CAN_controller
+        source:
+          - CAN_channel
+  - name: Coupling_port
+    inlinks:
+      - type: Coupling_ports
+        source:
+          - Switch
+  - name: VLAN
+    outlinks:
+      - type: Ethernet_communication_connector
+        target:
+          - Ethernet_communication_connector_Classic
+          - Ethernet_communication_connector_Adaptive
+      - type: Generic_channel
+        target:
+          - Generic_channel
+    inlinks:
+      - type: VLANs
+        source:
+          - Ethernet_bus
+      - type: Ethernet_channels
+        source:
+          - Switch
+  - name: Switch
+    outlinks:
+      - type: Ethernet_channels
+        target:
+          - VLAN
+      - type: Coupling_ports
+        target:
+          - Coupling_port
+    inlinks:
+      - type: Coupling_Element
+        source:
+          - Ethernet_bus
+  - name: Ethernet_controller
+    inlinks:
+      - type: EthernetController
+        source:
+          - Ethernet_communication_connector_Classic
+  - name: Ipv4_configuration
+    inlinks:
+      - type: Network_addresses
+        source:
+          - Network_endpoint
+  - name: Machine_design
+    outlinks:
+      - type: Represents_network_signaling_for_generic
+        target:
+          - Generic_SW_Target
+      - type: Connectors
+        target:
+          - Ethernet_communication_connector_Adaptive
+    inlinks:
+      - type: Network_Node
+        source:
+          - Communication_Topology
+  - name: CAN_cluster
+    outlinks:
+      - type: CAN_channel
+        target:
+          - CAN_channel
+    inlinks:
+      - type: Clusters
+        source:
+          - Communication_Topology
+  - name: Ethernet_bus
+    outlinks:
+      - type: VLANs
+        target:
+          - VLAN
+      - type: Coupling_Element
+        target:
+          - Switch
+    inlinks:
+      - type: Clusters
+        source:
+          - Communication_Topology
+  - name: Test_Case
+    outlinks:
+      - type: Test_Case_Requirement
+        target:
+          - Stakeholder_Req
+          - Function_Requirement
+          - Design_Requirement
+    inlinks:
+      - type: Test_Case
+        source:
+          - Test_Specification
+  - name: Test_Scope
+    outlinks:
+      - type: Specification
+        target:
+          - Design_Requirement_Group
+          - Stakeholder_Requirements_Area
+          - Function_Level
+      - type: Test_Specification
+        target:
+          - Test_Specification
+    inlinks:
+      - type: Test_Scope
+        source:
+          - Test_Area
+  - name: Test_Specification
+    outlinks:
+      - type: Test_Case
+        target:
+          - Test_Case
+      - type: Specifying_Requirement_Container
+        target:
+          - Design_Requirement_Group
+          - Stakeholder_Requirements_Group
+          - Function_Requirement_Group
+      - type: Test_Specifications_Requirements
+        target:
+          - Stakeholder_Req
+          - Function_Requirement
+          - Design_Requirement
+    inlinks:
+      - type: Test_Specification
+        source:
+          - Test_Scope
+  - name: Stakeholder_Req
+    inlinks:
+      - type: Test_Case_Requirement
+        source:
+          - Test_Case
+      - type: Test_Specifications_Requirements
+        source:
+          - Test_Specification
+      - type: Traced_from
+        source:
+          - Req_Trace_Item
+      - type: Stakeholder_Requirement
+        source:
+          - Stakeholder_Requirements_Group
+      - type: Incoming_Requirement
+        source:
+          - Legal_Inbox
+      - type: Incoming_Stakeholder_Requirement
+        source:
+          - Function_Inbox
+  - name: Req_Trace_Item
+    outlinks:
+      - type: Traced_from
+        target:
+          - Stakeholder_Req
+          - Function_Requirement
+          - Legal_Requirement
+      - type: Specified_Requirement
+        target:
+          - Function_Requirement
+          - Design_Requirement
+          - Legal_Requirement
+    inlinks:
+      - type: Mappings
+        source:
+          - Mapping_container
+  - name: Function_Requirement
+    inlinks:
+      - type: Test_Case_Requirement
+        source:
+          - Test_Case
+      - type: Test_Specifications_Requirements
+        source:
+          - Test_Specification
+      - type: Traced_from
+        source:
+          - Req_Trace_Item
+      - type: Specified_Requirement
+        source:
+          - Req_Trace_Item
+      - type: Requirement
+        source:
+          - Conceptual_System_Component
+      - type: Function_Requirement
+        source:
+          - Function_Requirement_Group
+  - name: Design_Architecture
+    outlinks:
+      - type: Service_interfaces
+        target:
+          - Service_interface_list
+      - type: Unallocated_Design
+        target:
+          - Unallocated_Design
+      - type: Allocated_design
+        target:
+          - Allocated_System
+      - type: Data_types_list
+        target:
+          - Data_type_list
+    inlinks:
+      - type: Design_Architecture
+        source:
+          - Electronic_System_Architecture
+  - name: Test_Architecture
+    outlinks:
+      - type: Test_Area
+        target:
+          - Test_Area
+    inlinks:
+      - type: Test_Area
+        source:
+          - Electronic_System_Architecture
+  - name: Test_Area
+    outlinks:
+      - type: Test_Scope
+        target:
+          - Test_Scope
+    inlinks:
+      - type: Test_Area
+        source:
+          - Test_Architecture
+  - name: Baseline_Architecture
+    outlinks:
+      - type: Specification
+        target:
+          - Electronic_System_Architecture
+      - type: Stakeholder_Area
+        target:
+          - Stakeholder_Requirements_Area
+      - type: Legal_Requirement_Area
+        target:
+          - Legal_Requirement_Level
+      - type: Attribute_Area
+        target:
+          - Attribute_Area
+  - name: Design_Requirement_Group
+    outlinks:
+      - type: Requirement
+        target:
+          - Design_Requirement
+      - type: Design_Requirement_Sub-Group
+        target:
+          - Design_Requirement_Group
+    inlinks:
+      - type: Specification
+        source:
+          - Test_Scope
+      - type: Specifying_Requirement_Container
+        source:
+          - Test_Specification
+      - type: Design_Requirement_Sub-Group
+        source:
+          - Design_Requirement_Group
+      - type: Design_Requirement_Group
+        source:
+          - Application_SW_component_type
+  - name: Design_Requirement
+    inlinks:
+      - type: Test_Case_Requirement
+        source:
+          - Test_Case
+      - type: Test_Specifications_Requirements
+        source:
+          - Test_Specification
+      - type: Specified_Requirement
+        source:
+          - Req_Trace_Item
+      - type: Requirement
+        source:
+          - Design_Requirement_Group
+  - name: Mapping_container
+    outlinks:
+      - type: Mappings
+        target:
+          - Req_Trace_Item
+    inlinks:
+      - type: Function_Mapping_Area
+        source:
+          - Function
+      - type: Legal_Mapping_Area
+        source:
+          - Legal_Requirement_Area
+      - type: Design_Function_Mapping_Area
+        source:
+          - Design_Function
+  - name: Stakeholder_Requirements_Group
+    outlinks:
+      - type: Stakeholder_Req_Subgroup
+        target:
+          - Stakeholder_Requirements_Group
+      - type: Stakeholder_Requirement
+        target:
+          - Stakeholder_Req
+    inlinks:
+      - type: Specifying_Requirement_Container
+        source:
+          - Test_Specification
+      - type: Stakeholder_Req_Subgroup
+        source:
+          - Stakeholder_Requirements_Group
+      - type: Stakeholder_Requirement_Group
+        source:
+          - Stakeholder_Requirements_Area
+  - name: Generic_Threat
+    outlinks:
+      - type: Type_of_Threat
+        target:
+          - Type_of_Threat
+    inlinks:
+      - type: Generic_Threat
+        source:
+          - Threat_and_Attack_Catalog
+      - type: Exploits
+        source:
+          - Attack_Method
+      - type: Based_on_Threat_from_Catalog
+        source:
+          - Threat_Scenario
+  - name: Threat_and_Attack_Catalog
+    outlinks:
+      - type: Generic_Threat
+        target:
+          - Generic_Threat
+    inlinks:
+      - type: Generic_Threats_Catalog
+        source:
+          - Cybersecurity_Catalog
+  - name: Cybersecurity_Goal
+    outlinks:
+      - type: On_Threat_Scenario
+        target:
+          - Threat_Scenario
+      - type: Based_on_Mitigation_from_Catalog
+        target:
+          - Security_Mitigation
+      - type: Supported_by_Cybersecurity_Requirement
+        target:
+          - Cybersecurity_Requirement
+    inlinks:
+      - type: Security_Goal_Claim
+        source:
+          - TARA
+      - type: Requirement
+        source:
+          - Conceptual_System_Component
+      - type: Incoming_Security_Goal
+        source:
+          - TARA
+      - type: Represents_Nominal_Data
+        source:
+          - Information_Medium
+  - name: TARA
+    outlinks:
+      - type: Asset
+        target:
+          - Conceptual_System_Component
+          - Information_Medium
+      - type: Threat_Scenario
+        target:
+          - Threat_Scenario
+      - type: Security_Property_List
+        target:
+          - Security_Property_Catalog
+      - type: Security_Goal_Claim
+        target:
+          - Cybersecurity_Goal
+          - Cybersecurity_Claim
+      - type: Damage_Scenario
+        target:
+          - Damage_Scenario
+      - type: Security_Item_Definition
+        target:
+          - Conceptual_System_Model
+      - type: Non-Damage_Scenario
+        target:
+          - Non-Damage_Scenario
+      - type: Incoming_Security_Goal
+        target:
+          - Cybersecurity_Goal
+    inlinks:
+      - type: Threat_Analysis_Area
+        source:
+          - Cybersecurity_Area
+  - name: Damage_Scenario
+    outlinks:
+      - type: Analyzed_Asset
+        target:
+          - Conceptual_System_Component
+          - Information_Medium
+      - type: Violates_Security_Property
+        target:
+          - Security_Property
+    inlinks:
+      - type: Damage_Scenario
+        source:
+          - TARA
+      - type: Leads_to_Damage_Scenario
+        source:
+          - Threat_Scenario
+  - name: Threat_Scenario
+    outlinks:
+      - type: Attack_Path
+        target:
+          - Attack_And
+          - Attack_Step
+          - Attack_Or
+          - CVSS_Vulnerability_Attack
+          - Attack_Vector
+      - type: Leads_to_Damage_Scenario
+        target:
+          - Damage_Scenario
+      - type: Based_on_Threat_from_Catalog
+        target:
+          - Generic_Threat
+    inlinks:
+      - type: Threat_Scenario
+        source:
+          - TARA
+      - type: On_Threat_Scenario
+        source:
+          - Cybersecurity_Goal
+          - Cybersecurity_Claim
+  - name: Attack_And
+    outlinks:
+      - type: Attack_Path
+        target:
+          - Attack_Step
+          - Attack_Vector
+      - type: Based_on_Attack_Method_from_Catalog
+        target:
+          - Attack_Method
+      - type: Control
+        target:
+          - Cybersecurity_Requirement
+    inlinks:
+      - type: SP0262-Attack_Path
+        source:
+          - Threat_Scenario
+      - type: SP0267-Attack_Path
+        source:
+          - Attack_Or
+  - name: Attack_Step
+    outlinks:
+      - type: Based_on_Attack_Method_from_Catalog
+        target:
+          - Attack_Method
+      - type: Control
+        target:
+          - Cybersecurity_Requirement
+      - type: On_Component
+        target:
+          - Conceptual_System_Component
+    inlinks:
+      - type: SP0262-Attack_Path
+        source:
+          - Threat_Scenario
+      - type: SP0267-Attack_Path
+        source:
+          - Attack_And
+          - Attack_Or
+  - name: Attack_Or
+    outlinks:
+      - type: Attack_Path
+        target:
+          - Attack_And
+          - Attack_Step
+          - CVSS_Vulnerability_Attack
+          - Attack_Vector
+    inlinks:
+      - type: Attack_Path
+        source:
+          - Threat_Scenario
+  - name: Cybersecurity_Requirement
+    inlinks:
+      - type: Requirement
+        source:
+          - Conceptual_System_Component
+      - type: Control
+        source:
+          - Attack_And
+          - Attack_Step
+          - Attack_Vector
+      - type: Supported_by_Cybersecurity_Requirement
+        source:
+          - Cybersecurity_Goal
+          - Cybersecurity_Claim
+  - name: Attack_Method
+    outlinks:
+      - type: Exploits
+        target:
+          - Generic_Threat
+      - type: Asset_Vulnerability_to_Attack
+        target:
+          - Generic_Asset
+    inlinks:
+      - type: Based_on_Attack_Method_from_Catalog
+        source:
+          - Attack_And
+          - Attack_Step
+          - Attack_Vector
+      - type: Mitigated_Threat
+        source:
+          - Security_Mitigation
+  - name: Type_of_Threat
+    inlinks:
+      - type: Type_of_Threat
+        source:
+          - Generic_Threat
+  - name: Generic_Asset
+    inlinks:
+      - type: Asset_Vulnerability_to_Attack
+        source:
+          - Attack_Method
+      - type: Catalogue_Asset
+        source:
+          - Asset_Catalog
+      - type: Based_on_Technology_from_Catalog
+        source:
+          - Conceptual_System_Component
+          - Information_Medium
+  - name: Asset_Catalog
+    outlinks:
+      - type: Catalogue_Asset
+        target:
+          - Generic_Asset
+    inlinks:
+      - type: Asset_Catalog
+        source:
+          - Cybersecurity_Catalog
+  - name: Cybersecurity_Case
+    outlinks:
+      - type: InContextOf
+        target:
+          - Context
+    inlinks:
+      - type: Security_Case
+        source:
+          - Cybersecurity_Area
+  - name: CVSS_Vulnerability_Attack
+    outlinks:
+      - type: On_Component
+        target:
+          - Conceptual_System_Component
+    inlinks:
+      - type: SP0262-Attack_Path
+        source:
+          - Threat_Scenario
+      - type: SP0267-Attack_Path
+        source:
+          - Attack_Or
+  - name: Attack_Vector
+    outlinks:
+      - type: Based_on_Attack_Method_from_Catalog
+        target:
+          - Attack_Method
+      - type: Control
+        target:
+          - Cybersecurity_Requirement
+      - type: On_Component
+        target:
+          - Conceptual_System_Component
+          - Abstract_Interface
+          - Information_Medium
+    inlinks:
+      - type: SP0262-Attack_Path
+        source:
+          - Threat_Scenario
+      - type: SP0267-Attack_Path
+        source:
+          - Attack_And
+          - Attack_Or
+  - name: Stakeholder_Requirements_Area
+    outlinks:
+      - type: Stakeholder_Requirement_Group
+        target:
+          - Stakeholder_Requirements_Group
+    inlinks:
+      - type: Specification
+        source:
+          - Test_Scope
+      - type: Stakeholder_Area
+        source:
+          - Baseline_Architecture
+  - name: Non-Damage_Scenario
+    inlinks:
+      - type: Non-Damage_Scenario
+        source:
+          - TARA
+  - name: Cybersecurity_Area
+    outlinks:
+      - type: Threat_Analysis_Area
+        target:
+          - TARA
+      - type: Cybersecurity_Catalog
+        target:
+          - Cybersecurity_Catalog
+      - type: Security_Case
+        target:
+          - Cybersecurity_Case
+    inlinks:
+      - type: Cybersecurity_Area
+        source:
+          - Electronic_System_Architecture
+  - name: Cybersecurity_Catalog
+    outlinks:
+      - type: Mitigation_Catalog
+        target:
+          - Mitigation_Catalog
+      - type: Generic_Threats_Catalog
+        target:
+          - Threat_and_Attack_Catalog
+      - type: Asset_Catalog
+        target:
+          - Asset_Catalog
+    inlinks:
+      - type: Cybersecurity_Catalog
+        source:
+          - Cybersecurity_Area
+  - name: Mitigation_Catalog
+    outlinks:
+      - type: Catalog_Mitigation
+        target:
+          - Security_Mitigation
+    inlinks:
+      - type: Mitigation_Catalog
+        source:
+          - Cybersecurity_Catalog
+  - name: Security_Mitigation
+    outlinks:
+      - type: Mitigated_Threat
+        target:
+          - Attack_Method
+      - type: Cybersecurity_Control
+        target:
+          - Standard_Process_Requirement
+    inlinks:
+      - type: Catalog_Mitigation
+        source:
+          - Mitigation_Catalog
+      - type: Based_on_Mitigation_from_Catalog
+        source:
+          - Cybersecurity_Goal
+          - Cybersecurity_Claim
+  - name: Security_Property
+    inlinks:
+      - type: Violates_Security_Property
+        source:
+          - Damage_Scenario
+      - type: Security_Property
+        source:
+          - Security_Property_Catalog
+  - name: Security_Property_Catalog
+    outlinks:
+      - type: Security_Property
+        target:
+          - Security_Property
+    inlinks:
+      - type: Security_Property_List
+        source:
+          - TARA
+  - name: Conceptual_System_Model
+    outlinks:
+      - type: System_Component
+        target:
+          - Conceptual_System_Component
+      - type: External_Component
+        target:
+          - Conceptual_System_Component
+          - System_Stakeholder
+    inlinks:
+      - type: Security_Item_Definition
+        source:
+          - TARA
+  - name: Conceptual_System_Component
+    outlinks:
+      - type: Input_Interface
+        target:
+          - Abstract_Interface
+      - type: Output_Interface
+        target:
+          - Abstract_Interface
+      - type: Based_on_Technology_from_Catalog
+        target:
+          - Generic_Asset
+      - type: Requirement
+        target:
+          - Function_Requirement
+          - Cybersecurity_Goal
+          - Cybersecurity_Requirement
+      - type: Represents_Nominal_Data
+        target:
+          - SW_Target
+      - type: Subcomponent
+        target:
+          - Conceptual_System_Component
+      - type: Inout_Interface
+        target:
+          - Abstract_Interface
+      - type: Stored_Information
+        target:
+          - Abstract_Interface
+      - type: Information_Medium
+        target:
+          - Information_Medium
+    inlinks:
+      - type: Analyzed_Asset
+        source:
+          - Damage_Scenario
+      - type: Asset
+        source:
+          - TARA
+      - type: System_Component
+        source:
+          - Conceptual_System_Model
+      - type: External_Component
+        source:
+          - Conceptual_System_Model
+      - type: Subcomponent
+        source:
+          - Conceptual_System_Component
+      - type: On_Component
+        source:
+          - Attack_Step
+          - CVSS_Vulnerability_Attack
+          - Attack_Vector
+  - name: Abstract_Interface
+    inlinks:
+      - type: Input_Interface
+        source:
+          - Conceptual_System_Component
+      - type: Output_Interface
+        source:
+          - Conceptual_System_Component
+          - System_Stakeholder
+      - type: On_Component
+        source:
+          - Attack_Vector
+      - type: Inout_Interface
+        source:
+          - Conceptual_System_Component
+      - type: Stored_Information
+        source:
+          - Conceptual_System_Component
+          - System_Stakeholder
+  - name: System_Stakeholder
+    outlinks:
+      - type: Output_Interface
+        target:
+          - Abstract_Interface
+      - type: Stored_Information
+        target:
+          - Abstract_Interface
+    inlinks:
+      - type: External_Component
+        source:
+          - Conceptual_System_Model
+  - name: Standard_Process_Requirement
+    inlinks:
+      - type: Cybersecurity_Control
+        source:
+          - Security_Mitigation
+  - name: Context
+    inlinks:
+      - type: InContextOf
+        source:
+          - Cybersecurity_Case
+  - name: Functional_Safety_Area
+    outlinks:
+      - type: Guideword_Container
+        target:
+          - Guideword_Container
+      - type: Situation_Container
+        target:
+          - Situation_Container
+    inlinks:
+      - type: Safety_Area
+        source:
+          - Function_Level
+  - name: Hazard
+    outlinks:
+      - type: Guideword
+        target:
+          - Generic_Failure_Mode
+      - type: Analyzed_Item_Detail
+        target:
+          - Functional_safety_requirement
+    inlinks:
+      - type: HARA_Hazard
+        source:
+          - Hazard_Identification
+      - type: Haz_Ev_Hazard
+        source:
+          - Hazardous_Event
+          - Non-hazardous_Event
+  - name: Hazardous_Event
+    outlinks:
+      - type: Haz_Ev_Hazard
+        target:
+          - Hazard
+      - type: Situation
+        target:
+          - Scenario
+    inlinks:
+      - type: HARA_Hazardous_Event
+        source:
+          - Hazard_Identification
+      - type: SG_Hazardous_Event
+        source:
+          - Safety_Goal
+  - name: Generic_Failure_Mode
+    inlinks:
+      - type: SP0515-Guideword
+        source:
+          - Guideword_Container
+      - type: SP0516-Guideword
+        source:
+          - Hazard
+          - Non-hazard
+  - name: Guideword_Container
+    outlinks:
+      - type: Guideword
+        target:
+          - Generic_Failure_Mode
+    inlinks:
+      - type: Guideword_Container
+        source:
+          - Functional_Safety_Area
+  - name: Non-hazard
+    outlinks:
+      - type: Guideword
+        target:
+          - Generic_Failure_Mode
+      - type: Analyzed_Item_Detail
+        target:
+          - Functional_safety_requirement
+    inlinks:
+      - type: HARA_Non-hazard
+        source:
+          - Hazard_Identification
+  - name: Non-hazardous_Event
+    outlinks:
+      - type: Haz_Ev_Hazard
+        target:
+          - Hazard
+      - type: Situation
+        target:
+          - Scenario
+    inlinks:
+      - type: HARA_Non-hazardous_Event
+        source:
+          - Hazard_Identification
+  - name: Situation_Container
+    outlinks:
+      - type: Predefined_Situation
+        target:
+          - Scenario
+    inlinks:
+      - type: Situation_Container
+        source:
+          - Functional_Safety_Area
+  - name: Safety_Goal
+    outlinks:
+      - type: SG_Hazardous_Event
+        target:
+          - Hazardous_Event
+    inlinks:
+      - type: Safety_Goal
+        source:
+          - Hazard_Identification
+  - name: Functional_safety_requirement
+    inlinks:
+      - type: Analyzed_Item_Detail
+        source:
+          - Hazard
+          - Non-hazard
+      - type: Safety_related_item_details
+        source:
+          - Safety_Item
+  - name: Functional_Safety_Concept
+    outlinks:
+      - type: HARA
+        target:
+          - Hazard_Identification
+    inlinks:
+      - type: Functional_Safety_Concept
+        source:
+          - Function
+  - name: Hazard_Identification
+    outlinks:
+      - type: HARA_Hazard
+        target:
+          - Hazard
+      - type: HARA_Hazardous_Event
+        target:
+          - Hazardous_Event
+      - type: Safety_Goal
+        target:
+          - Safety_Goal
+      - type: HARA_Non-hazard
+        target:
+          - Non-hazard
+      - type: HARA_Non-hazardous_Event
+        target:
+          - Non-hazardous_Event
+      - type: Safety_Item
+        target:
+          - Safety_Item
+    inlinks:
+      - type: HARA
+        source:
+          - Functional_Safety_Concept
+  - name: Safety_Item
+    outlinks:
+      - type: Safety_related_item_details
+        target:
+          - Functional_safety_requirement
+    inlinks:
+      - type: Safety_Item
+        source:
+          - Hazard_Identification
+  - name: Information_Medium
+    outlinks:
+      - type: Based_on_Technology_from_Catalog
+        target:
+          - Generic_Asset
+      - type: Represents_Nominal_Data
+        target:
+          - Cybersecurity_Goal
+    inlinks:
+      - type: Analyzed_Asset
+        source:
+          - Damage_Scenario
+      - type: Asset
+        source:
+          - TARA
+      - type: On_Component
+        source:
+          - Attack_Vector
+      - type: Information_Medium
+        source:
+          - Conceptual_System_Component
+  - name: Cybersecurity_Claim
+    outlinks:
+      - type: On_Threat_Scenario
+        target:
+          - Threat_Scenario
+      - type: Based_on_Mitigation_from_Catalog
+        target:
+          - Security_Mitigation
+      - type: Supported_by_Cybersecurity_Requirement
+        target:
+          - Cybersecurity_Requirement
+    inlinks:
+      - type: Security_Goal_Claim
+        source:
+          - TARA
+  - name: Electronic_System_Architecture
+    outlinks:
+      - type: Function_Level
+        target:
+          - Function_Level
+      - type: Design_Architecture
+        target:
+          - Design_Architecture
+      - type: Test_Area
+        target:
+          - Test_Architecture
+      - type: Cybersecurity_Area
+        target:
+          - Cybersecurity_Area
+    inlinks:
+      - type: Specification
+        source:
+          - Baseline_Architecture
+  - name: Legal_Requirement_Level
+    outlinks:
+      - type: Legal_Requirement_Area
+        target:
+          - Legal_Requirement_Area
+    inlinks:
+      - type: Legal_Requirement_Area
+        source:
+          - Baseline_Architecture
+  - name: Legal_Requirement_Area
+    outlinks:
+      - type: Legal_Requirement_Group
+        target:
+          - Legal_Requirement_Group
+      - type: Legal_Inbox
+        target:
+          - Legal_Inbox
+      - type: Legal_Mapping_Area
+        target:
+          - Mapping_container
+    inlinks:
+      - type: Legal_Requirement_Area
+        source:
+          - Legal_Requirement_Level
+  - name: Legal_Requirement_Group
+    outlinks:
+      - type: Legal_Requirement
+        target:
+          - Legal_Requirement
+      - type: Legal_Requirement_Sub-Group
+        target:
+          - Legal_Requirement_Group
+    inlinks:
+      - type: Legal_Requirement_Group
+        source:
+          - Legal_Requirement_Area
+      - type: Legal_Requirement_Sub-Group
+        source:
+          - Legal_Requirement_Group
+  - name: Legal_Requirement
+    inlinks:
+      - type: Traced_from
+        source:
+          - Req_Trace_Item
+      - type: Specified_Requirement
+        source:
+          - Req_Trace_Item
+      - type: Legal_Requirement
+        source:
+          - Legal_Requirement_Group
+      - type: Incoming_Legal_Requirement
+        source:
+          - Function_Inbox
+  - name: Legal_Inbox
+    outlinks:
+      - type: Incoming_Requirement
+        target:
+          - Stakeholder_Req
+    inlinks:
+      - type: Legal_Inbox
+        source:
+          - Legal_Requirement_Area
+  - name: Attribute_Area
+    outlinks:
+      - type: Attribute
+        target:
+          - Attribute
+    inlinks:
+      - type: Attribute_Area
+        source:
+          - Baseline_Architecture
+  - name: Attribute
+    outlinks:
+      - type: Attribute_Inbox
+        target:
+          - Attribute_Inbox
+      - type: Attribute_Handshake
+        target:
+          - Attribute_Handshake
+    inlinks:
+      - type: Attribute
+        source:
+          - Attribute_Area
+  - name: Attribute_Inbox
+    inlinks:
+      - type: Attribute_Inbox
+        source:
+          - Attribute
+  - name: Function_Level
+    outlinks:
+      - type: Safety_Area
+        target:
+          - Functional_Safety_Area
+      - type: Function
+        target:
+          - Function
+    inlinks:
+      - type: Specification
+        source:
+          - Test_Scope
+      - type: Function_Level
+        source:
+          - Electronic_System_Architecture
+  - name: Function
+    outlinks:
+      - type: Function_Inbox
+        target:
+          - Function_Inbox
+      - type: Function_Specification
+        target:
+          - Function_Specification
+      - type: Function_Mapping_Area
+        target:
+          - Mapping_container
+      - type: Function_Realization
+        target:
+          - Function_Realization
+      - type: Functional_Safety_Concept
+        target:
+          - Functional_Safety_Concept
+    inlinks:
+      - type: Function
+        source:
+          - Function_Level
+  - name: Function_Inbox
+    outlinks:
+      - type: Incoming_Stakeholder_Requirement
+        target:
+          - Stakeholder_Req
+      - type: Incoming_Legal_Requirement
+        target:
+          - Legal_Requirement
+    inlinks:
+      - type: Function_Inbox
+        source:
+          - Function
+  - name: Function_Requirement_Group
+    outlinks:
+      - type: Function_Requirement
+        target:
+          - Function_Requirement
+    inlinks:
+      - type: Specifying_Requirement_Container
+        source:
+          - Test_Specification
+      - type: Function_Requirement_Group
+        source:
+          - Function_Realization_Block
+      - type: Specification_Requirement_Group
+        source:
+          - Function_Specification
+  - name: Function_Realization
+    outlinks:
+      - type: Function_Realization_Block
+        target:
+          - Function_Realization_Block
+    inlinks:
+      - type: Function_Realization
+        source:
+          - Function
+  - name: Function_Realization_Block
+    outlinks:
+      - type: Function_Requirement_Group
+        target:
+          - Function_Requirement_Group
+      - type: Send_Interface
+        target:
+          - Interface
+      - type: Receive_Interface
+        target:
+          - Interface
+    inlinks:
+      - type: Function_Realization_Block
+        source:
+          - Function_Realization
+      - type: Incoming_Function_Realization_Block
+        source:
+          - Design_Function_Inbox
+  - name: Interface
+    inlinks:
+      - type: Send_Interface
+        source:
+          - Function_Realization_Block
+      - type: Receive_Interface
+        source:
+          - Function_Realization_Block
+  - name: Design_Function_Inbox
+    outlinks:
+      - type: Incoming_Function_Realization_Block
+        target:
+          - Function_Realization_Block
+    inlinks:
+      - type: Design_Function_Inbox
+        source:
+          - Design_Function
+  - name: Function_Specification
+    outlinks:
+      - type: Specification_Requirement_Group
+        target:
+          - Function_Requirement_Group
+    inlinks:
+      - type: Function_Specification
+        source:
+          - Function
+  - name: Scenario
+    inlinks:
+      - type: Situation
+        source:
+          - Hazardous_Event
+          - Non-hazardous_Event
+      - type: Predefined_Situation
+        source:
+          - Situation_Container
+  - name: Attribute_Handshake
+    inlinks:
+      - type: Attribute_Handshake
+        source:
+          - Attribute
+  - name: Data_type_list
+    outlinks:
+      - type: Data_type_list
+        target:
+          - Application_data_types
+    inlinks:
+      - type: Data_types_list
+        source:
+          - Design_Architecture
+  - name: Application_data_types
+    outlinks:
+      - type: Application_data_types
+        target:
+          - Array_data_type
+          - Primitive_data_type
+          - Record_data_type
+    inlinks:
+      - type: Data_type_list
+        source:
+          - Data_type_list
