@@ -79,3 +79,31 @@ This folder is already set up for Claude Code CLI — `CLAUDE.md` describes the 
 - *Does the requirement "Keyless entry" (`x0400000000038EAE`) have any test cases?*
 - *Starting from "Unauthorized start detection", which Function Requirements are downstream, and which Design Requirements are one level further?*
 - *If "Engine start time" is tightened, which Design Requirements are impacted? Which mention timing or timeout?*
+
+
+## Other Element Types Intersting to Explore
+
+Some other element types that might be interesting to explore:
+
+| Type | What it represents |
+|---|---|
+| `Stakeholder_Req` | Top-level needs |
+| `Legal_Requirement` | Regulatory drivers (FMVSS, ISO/SAE 21434) |
+| `Function_Requirement` | What the system shall do |
+| `Design_Requirement` | How it does it |
+| `Req_Trace_Item` | Traceability bridges between levels — start `--followlinks` from here |
+| `Test_Case` | Verification coverage |
+| `Hazardous_Event` | Safety analysis scenarios |
+| `Safety_Goal` | High-level safety objectives |
+| `Hazard` | Root hazards identified in the HARA |
+| `Functional_safety_requirement` | Safety requirements derived from hazard analysis |
+| `Threat_Scenario` | Cybersecurity attack scenarios specific to this system |
+| `Generic_Threat` | Reusable threat catalogue entries |
+| `Attack_Method` | How a threat is carried out (technique-level) |
+| `Attack_Vector` | Specific entry points exploited in an attack |
+| `Damage_Scenario` | Concrete impact if a threat is realised |
+| `Cybersecurity_Goal` | High-level security objectives |
+| `Cybersecurity_Requirement` | Concrete security controls (SecOC, encryption, firmware update) |
+| `Generic_Asset` | Protected assets catalogue (IMMO ECU, CAN Bus, Key Fob) |
+| `Conceptual_System_Component` | System components and their interfaces — starting point for asset analysis |
+| `Standard_Process_Requirement` | ISO/SAE 21434 process-level requirements |
