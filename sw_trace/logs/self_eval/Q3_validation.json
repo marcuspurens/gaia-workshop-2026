@@ -1,0 +1,26 @@
+{
+  "parsed_ok": true,
+  "grounded": true,
+  "review_required": false,
+  "mentioned_ids": [
+    "x0400000000003B28",
+    "x040000000003854D",
+    "x0400000000038EB6",
+    "x0400000000038EBA",
+    "x0400000000039040",
+    "x040000000003904B",
+    "x0400000000039054",
+    "x0400000000039281",
+    "x0400000000039285",
+    "x040000000003928E"
+  ],
+  "unsupported_text_ids": [],
+  "claim_count": 6,
+  "unsupported_claim_ids": [],
+  "citation_count": 18,
+  "unsupported_citations": [],
+  "root_anchored_claim_count": 6,
+  "root_anchored_coverage": 1.0,
+  "structural_issues": [],
+  "auto_demoted": []
+}

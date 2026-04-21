@@ -1,0 +1,21 @@
+{
+  "parsed_ok": true,
+  "grounded": true,
+  "review_required": false,
+  "mentioned_ids": [
+    "x04000000000384E6",
+    "x0400000000039048",
+    "x040000000003924F",
+    "x0400000000039278",
+    "x040000000003927C"
+  ],
+  "unsupported_text_ids": [],
+  "claim_count": 2,
+  "unsupported_claim_ids": [],
+  "citation_count": 4,
+  "unsupported_citations": [],
+  "root_anchored_claim_count": 2,
+  "root_anchored_coverage": 1.0,
+  "structural_issues": [],
+  "auto_demoted": []
+}

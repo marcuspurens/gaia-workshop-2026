@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sw_trace"
+version = "0.2.0"
+description = "Metamodel-aware traceability assistant for SystemWeaver graphs."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+authors = [{ name = "Shahid Muhammad" }]
+
+# Runtime dependencies are intentionally minimal: the whole package relies
+# on the Python standard library for networking (urllib) and data
+# handling (json / re / dataclasses). Installing in editable mode only
+# needs the build backend above.
+dependencies = []
+
+[project.optional-dependencies]
+# Notebook dependency is separated so a plain CLI / server install does
+# not pull Jupyter in.
+notebook = ["ipykernel", "jupyter"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["sw_trace*"]

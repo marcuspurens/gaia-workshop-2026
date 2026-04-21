@@ -1,0 +1,90 @@
+{
+  "answer_summary": "Removing the Legal Requirement 'UNECE Regulation No.155' (x04000000000384CF) directly breaks the Req Trace Item chain to one Function Requirement and two Design Requirements: FR 'Engine start/stop' (x04000000000384E2) traced from UNECE via the RTI 'UNECE Regulation No.155' (x0400000000038550) (SP0003 to UNECE, SP0006 to the FR); and two DRs one step further via the RTI 'Engine start/stop' (x0400000000039045) — 'Key authentication before engine start' (x040000000003926F) and 'Engine stop on key removal' (x0400000000039273). No Function Requirement is affected at the 'function requirements' level beyond Engine start/stop under the requirement_trace whitelist, because all other FRs in the packet derive from a Stakeholder Req (not from UNECE directly).",
+  "graph_proven_items": [
+    {
+      "id": "x04000000000384E2",
+      "name": "Engine start/stop",
+      "item_type": "Function Requirement",
+      "rationale": "Function Requirement directly derived from UNECE via the Req Trace Item 'UNECE Regulation No.155' (x0400000000038550). The RTI's SP0003 edge identifies UNECE as the source and SP0006 identifies this FR as the target — so removing UNECE breaks this derivation.",
+      "citations": [
+        {
+          "from": "x0400000000038550",
+          "to": "x04000000000384CF",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x0400000000038550",
+          "to": "x04000000000384E2",
+          "relation_sid": "SP0006"
+        }
+      ]
+    },
+    {
+      "id": "x040000000003926F",
+      "name": "Key authentication before engine start",
+      "item_type": "Design Requirement",
+      "rationale": "Design Requirement derived from FR 'Engine start/stop' via the Req Trace Item 'Engine start/stop' (x0400000000039045): SP0003 to the FR (source) and SP0006 to this DR (target). Because the FR itself is derived from UNECE, removing UNECE cascades to this DR.",
+      "citations": [
+        {
+          "from": "x0400000000038550",
+          "to": "x04000000000384CF",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x0400000000038550",
+          "to": "x04000000000384E2",
+          "relation_sid": "SP0006"
+        },
+        {
+          "from": "x0400000000039045",
+          "to": "x04000000000384E2",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x0400000000039045",
+          "to": "x040000000003926F",
+          "relation_sid": "SP0006"
+        }
+      ]
+    },
+    {
+      "id": "x0400000000039273",
+      "name": "Engine stop on key removal ",
+      "item_type": "Design Requirement",
+      "rationale": "Design Requirement derived from FR 'Engine start/stop' via the Req Trace Item 'Engine start/stop' (x0400000000039045): SP0003 to the FR (source) and SP0006 to this DR (target). Same cascade as 'Key authentication before engine start'.",
+      "citations": [
+        {
+          "from": "x0400000000038550",
+          "to": "x04000000000384CF",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x0400000000038550",
+          "to": "x04000000000384E2",
+          "relation_sid": "SP0006"
+        },
+        {
+          "from": "x0400000000039045",
+          "to": "x04000000000384E2",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x0400000000039045",
+          "to": "x0400000000039273",
+          "relation_sid": "SP0006"
+        }
+      ]
+    }
+  ],
+  "review_items": [],
+  "support_strength": "strong",
+  "uncertainties": [
+    "The packet also contains FR 'Engine start time' (x04000000000384E6), FR 'Compliance for anti theft system' (x0400000000038E9F), DR 'Ensure timely engine start' (x0400000000039278), and DR 'Apply engine start timeout' (x040000000003927C). These are reachable through RTI 'Anti theft system' (x0400000000038547), whose SP0003 edge identifies SR 'Anti theft system' (x0400000000037445) as source — not UNECE. They are therefore *siblings* of FR Engine start/stop under a shared stakeholder parent, not direct descendants of UNECE. They are excluded from graph_proven_items because removing UNECE does not sever their requirement-trace chain (the SR 'Anti theft system' remains). The extractor reaches them because graph reachability is undirected across the whitelist, not because they are semantically impacted.",
+    "The RTI 'Compliance' (x0400000000037458) has an SP0006 edge to UNECE but no downstream SP0006 leading to an FR/DR in the packet — so it contributes no claimed item.",
+    "The planner inferred target_item_types = ['Design Requirement'] only, despite the question explicitly asking about 'function and design requirements'. I included FR 'Engine start/stop' in graph_proven_items anyway because (a) it appears in the packet with a valid chain to root and (b) the question explicitly asks for FRs. This is a planner-side quirk that does not change the answer."
+  ],
+  "recommended_human_checks": [
+    "Confirm the SP0003-direction semantic interpretation above: in SystemWeaver, an RTI's SP0003 edge identifies the single upstream source; items reached by traversing another RTI's SP0006 edges 'sideways' are siblings, not descendants. If a human reviewer wants the broader reading (sibling-reachability treated as impact), Q1 should be rephrased to ask explicitly about graph-structural relatedness rather than impact-via-removal.",
+    "Verify the exported graph has UNECE R155's full RTI chain captured — only one RTI (x0400000000038550) was found as the direct SP0003 source for UNECE; if additional RTIs are expected, this is a data-completeness issue."
+  ]
+}

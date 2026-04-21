@@ -1,0 +1,154 @@
+{
+  "answer_summary": "Starting from the Stakeholder Requirement 'Unauthorized start detection' (x0400000000003B28), three Function Requirements appear in the local downstream trace tree — 'Diagnostic communication manager' (x0400000000038EB6), 'Authentication time' (x0400000000038EBA), and 'Alarm for unauthorized entry' (x0400000000039040) — all linked via the Req Trace Item 'Unauthorized start detection' (x040000000003854D) using SP0003 upward to the SR and SP0006 downward to each FR. One level further downstream, three Design Requirements are reached: 'Limit authentication time' (x040000000003928E) from FR 'Authentication time' via RTI x0400000000039054; 'Trigger alarm for unauthorized start' (x0400000000039281) and 'Activate acoustic alarm' (x0400000000039285) from FR 'Alarm for unauthorized entry' via RTI x040000000003904B. FR 'Diagnostic communication manager' does not have a Design Requirement reached in this packet under the chosen whitelists.",
+  "graph_proven_items": [
+    {
+      "id": "x0400000000038EB6",
+      "name": "Diagnostic communication manager",
+      "item_type": "Function Requirement",
+      "rationale": "Function Requirement traced from SR 'Unauthorized start detection' via the Req Trace Item 'Unauthorized start detection' (x040000000003854D): SP0003 to the SR (root) and SP0006 down to this FR.",
+      "citations": [
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000003B28",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000038EB6",
+          "relation_sid": "SP0006"
+        }
+      ]
+    },
+    {
+      "id": "x0400000000038EBA",
+      "name": "Authentication time",
+      "item_type": "Function Requirement",
+      "rationale": "Function Requirement traced from SR 'Unauthorized start detection' via the Req Trace Item 'Unauthorized start detection' (x040000000003854D): SP0003 to the SR (root) and SP0006 down to this FR.",
+      "citations": [
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000003B28",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000038EBA",
+          "relation_sid": "SP0006"
+        }
+      ]
+    },
+    {
+      "id": "x0400000000039040",
+      "name": "Alarm for unauthorized entry",
+      "item_type": "Function Requirement",
+      "rationale": "Function Requirement traced from SR 'Unauthorized start detection' via the Req Trace Item 'Unauthorized start detection' (x040000000003854D): SP0003 to the SR (root) and SP0006 down to this FR.",
+      "citations": [
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000003B28",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000039040",
+          "relation_sid": "SP0006"
+        }
+      ]
+    },
+    {
+      "id": "x040000000003928E",
+      "name": "Limit authentication time",
+      "item_type": "Design Requirement",
+      "rationale": "Design Requirement one level further downstream from FR 'Authentication time' (x0400000000038EBA). Req Trace Item 'Authentication time' (x0400000000039054) links SP0003 to the FR and SP0006 to this DR; the FR itself traces to SR root via RTI x040000000003854D. Description mentions 'authentication takes longer than specified N threshold' — semantically consistent.",
+      "citations": [
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000003B28",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000038EBA",
+          "relation_sid": "SP0006"
+        },
+        {
+          "from": "x0400000000039054",
+          "to": "x0400000000038EBA",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x0400000000039054",
+          "to": "x040000000003928E",
+          "relation_sid": "SP0006"
+        }
+      ]
+    },
+    {
+      "id": "x0400000000039281",
+      "name": "Trigger alarm for unauthorized start",
+      "item_type": "Design Requirement",
+      "rationale": "Design Requirement one level further downstream from FR 'Alarm for unauthorized entry' (x0400000000039040). Req Trace Item 'Alarm for unauthorized entry' (x040000000003904B) links SP0003 to the FR and SP0006 to this DR; the FR traces to SR root via RTI x040000000003854D.",
+      "citations": [
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000003B28",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000039040",
+          "relation_sid": "SP0006"
+        },
+        {
+          "from": "x040000000003904B",
+          "to": "x0400000000039040",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x040000000003904B",
+          "to": "x0400000000039281",
+          "relation_sid": "SP0006"
+        }
+      ]
+    },
+    {
+      "id": "x0400000000039285",
+      "name": "Activate acoustic alarm",
+      "item_type": "Design Requirement",
+      "rationale": "Design Requirement one level further downstream from FR 'Alarm for unauthorized entry' (x0400000000039040). Req Trace Item 'Alarm for unauthorized entry' (x040000000003904B) links SP0003 to the FR and SP0006 to this DR; the FR traces to SR root via RTI x040000000003854D.",
+      "citations": [
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000003B28",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x040000000003854D",
+          "to": "x0400000000039040",
+          "relation_sid": "SP0006"
+        },
+        {
+          "from": "x040000000003904B",
+          "to": "x0400000000039040",
+          "relation_sid": "SP0003"
+        },
+        {
+          "from": "x040000000003904B",
+          "to": "x0400000000039285",
+          "relation_sid": "SP0006"
+        }
+      ]
+    }
+  ],
+  "review_items": [],
+  "support_strength": "strong",
+  "uncertainties": [
+    "The FR 'Diagnostic communication manager' (x0400000000038EB6) has no Design Requirement reached in this packet under the chosen whitelist — meaning at the time of extraction no DR was traced below it. If such a DR exists in SystemWeaver, either it is not yet in the exported graph or requires a different relation whitelist to be reached.",
+    "The planner also targeted 'Functional safety requirement' in addition to FR and DR; none were reached from this root under the chosen whitelist, as reflected in the 'target_item_types_not_reached' warning.",
+    "The packet contains duplicate-name variants for 'Unauthorized start detection', 'Authentication time', and 'Alarm for unauthorized entry' across Stakeholder Req, Req Trace Item, and Function Requirement types; the citations above use exact ids so the duplication is a data-side quirk only."
+  ],
+  "recommended_human_checks": [
+    "Confirm whether the FR 'Diagnostic communication manager' is expected to derive any Design Requirement; if yes, inspect why the trace does not appear in the exported graph.",
+    "Confirm that the three downstream Design Requirements (Limit authentication time, Trigger alarm for unauthorized start, Activate acoustic alarm) are the intended one-hop-further coverage set."
+  ]
+}

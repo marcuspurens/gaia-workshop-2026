@@ -1,0 +1,25 @@
+{
+  "root": "Keyless entry",
+  "root_type": "Function Requirement",
+  "question": "Does the requirement \"Keyless entry\" (x0400000000038EAE) have any test cases?",
+  "node_count": 8,
+  "edge_count": 8,
+  "candidate_path_count": 5,
+  "warning_count": 0,
+  "sample_node_names": [
+    "Keyless entry",
+    "Key mangement",
+    "Keyless entry Test Case",
+    "Key management",
+    "Key encryption and decryption Test Case",
+    "Key managment Test Case",
+    "Authentication Test Case",
+    "Compliance for key management Test Case"
+  ],
+  "sample_edge_types": [
+    "ITEC",
+    "ITRQ",
+    "ITSI",
+    "ITTR"
+  ]
+}

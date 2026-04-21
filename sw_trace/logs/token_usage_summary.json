@@ -1,0 +1,52 @@
+{
+  "total_runs": 1,
+  "total_input_tokens": 16150,
+  "total_output_tokens": 7684,
+  "total_tokens": 23834,
+  "total_reasoning_tokens": 0,
+  "estimated_run_count": 0,
+  "provider_reported_run_count": 1,
+  "totals_by_run": {
+    "run_20260421_035645_openai_gpt51": {
+      "input_tokens": 16150,
+      "output_tokens": 7684,
+      "total_tokens": 23834,
+      "reasoning_tokens": 0,
+      "questions": 4
+    }
+  },
+  "totals_by_model": {
+    "gpt-5.1": {
+      "input_tokens": 16150,
+      "output_tokens": 7684,
+      "total_tokens": 23834,
+      "run_count": 1
+    }
+  },
+  "totals_by_question": {
+    "Q1": {
+      "input_tokens": 5023,
+      "output_tokens": 2474,
+      "total_tokens": 7497,
+      "occurrences": 1
+    },
+    "Q2": {
+      "input_tokens": 3326,
+      "output_tokens": 1405,
+      "total_tokens": 4731,
+      "occurrences": 1
+    },
+    "Q3": {
+      "input_tokens": 4406,
+      "output_tokens": 2198,
+      "total_tokens": 6604,
+      "occurrences": 1
+    },
+    "Q4": {
+      "input_tokens": 3395,
+      "output_tokens": 1607,
+      "total_tokens": 5002,
+      "occurrences": 1
+    }
+  }
+}
